@@ -1,10 +1,10 @@
 import { App, PluginSettingTab, Setting } from "obsidian";
-import AioImagePlugin from "./main";
+import EnhancedImagePlugin from "./main";
 
-export class AioImageSettingTab extends PluginSettingTab {
-  plugin: AioImagePlugin;
+export class EnhancedImageSettingTab extends PluginSettingTab {
+  plugin: EnhancedImagePlugin;
 
-  constructor(app: App, plugin: AioImagePlugin) {
+  constructor(app: App, plugin: EnhancedImagePlugin) {
     super(app, plugin);
     this.plugin = plugin;
   }
@@ -28,10 +28,10 @@ export class AioImageSettingTab extends PluginSettingTab {
 }
 
 
-export interface AioImageSettings {
+export interface EnhancedImageSettings {
   mySetting: string;
 }
 
-export const DEFAULT_SETTINGS: AioImageSettings = {
+export const DEFAULT_SETTINGS: EnhancedImageSettings = {
   mySetting: "default"
 };
