@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This plugin is designed to *imperceptibly* enhance the image experience in Obsidian. It provides a series of features to make the image management more convenient and efficient. The plugin aims at solving some problems for the image in Obsidian, for example,
+This plugin is designed to *seamlessly* enhance the image experience in Obsidian. It provides a series of features to make the image management more convenient and efficient. The plugin aims at solving some problems for the image in Obsidian, for example,
 
 1. The operations in context menu for the remote image is not enough for daily usage and there is even no context menu support for local image.
 2. It is hard to directly copy/rename/delete image from currently working Markdown file.
