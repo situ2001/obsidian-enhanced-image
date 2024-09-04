@@ -1,7 +1,7 @@
 {
 	"name": "obsidian-enhanced-image",
-	"version": "1.0.0",
-	"description": "Enhanced the experience of image in Obsidian.",
+	"version": "0.0.1",
+	"description": "Enhance the experience of image in Obsidian.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",

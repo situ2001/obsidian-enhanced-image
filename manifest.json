@@ -1,11 +1,11 @@
 {
 	"id": "obsidian-enhanced-image",
 	"name": "Enhanced Image",
-	"version": "1.0.0",
+	"version": "0.0.1",
 	"minAppVersion": "0.15.0",
-	"description": "Enhanced the experience of image in Obsidian.",
+	"description": "Enhance the experience of image in Obsidian.",
 	"author": "situ2001",
 	"authorUrl": "https://situ2001.com",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"fundingUrl": "",
 	"isDesktopOnly": false
 }
