@@ -38,11 +38,11 @@ export default class ImageContextMenuImpl implements ImageContextMenu {
     });
 
     menu.addItem((item) => {
-      item.setTitle("Copy Link");
+      item.setTitle("Copy link");
       item.setIcon("link");
       item.onClick(() => {
         if (!this.currentlySelectedImages) {
-          new Notice("No Image Selected");
+          new Notice("No image selected");
           return;
         }
         const file = getCurrentSelectedImageAsFile(this.plugin.app, this.currentlySelectedImages);
@@ -52,7 +52,7 @@ export default class ImageContextMenuImpl implements ImageContextMenu {
         }
         const link = this.plugin.app.fileManager.generateMarkdownLink(file, file.path);
         navigator.clipboard.writeText(link);
-        new Notice("Copy Link Successfully");
+        new Notice("Copy link successfully");
       });
     });
 
@@ -70,7 +70,7 @@ export default class ImageContextMenuImpl implements ImageContextMenu {
     });
 
     menu.addItem((item) => {
-      item.setTitle("Show in Folder"); // TODO macOS is finder and windows is explorer
+      item.setTitle("Show in folder"); // TODO macOS is finder and windows is explorer
       item.setIcon("folder-closed");
       item.onClick(() => {
         if (!this.currentlySelectedImages) {
@@ -156,7 +156,7 @@ export default class ImageContextMenuImpl implements ImageContextMenu {
         }
         // TODO maybe we can use generateMarkdown Link to get the link we want to replace by ''?
         new DeleteModal(this.plugin.app, {
-          title: "Delete Image",
+          title: "Delete image",
           content: "Are you sure you want to delete this image?",
         }, file, this.currentlySelectedImages).open();
         // safelyTrashImageFile(this.plugin.app, file);
@@ -228,7 +228,7 @@ export default class ImageContextMenuImpl implements ImageContextMenu {
     const currentlySelectedImages = this.currentMouseDownTarget as HTMLImageElement;
 
     menu.addItem((item) => {
-      item.setTitle("Copy Image");
+      item.setTitle("Copy image");
       item.setIcon("copy");
       item.onClick(() => {
         if (!currentlySelectedImages) {
@@ -240,7 +240,7 @@ export default class ImageContextMenuImpl implements ImageContextMenu {
     });
 
     menu.addItem((item) => {
-      item.setTitle("Copy Link");
+      item.setTitle("Copy link");
       item.setIcon("link");
       item.onClick(() => {
         if (!currentlySelectedImages) {
@@ -268,7 +268,7 @@ export default class ImageContextMenuImpl implements ImageContextMenu {
     });
 
     menu.addItem((item) => {
-      item.setTitle("Download & Replace");
+      item.setTitle("Download and replace");
       item.setIcon("download");
       item.onClick(async () => {
         if (!currentlySelectedImages) {

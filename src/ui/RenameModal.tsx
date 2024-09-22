@@ -39,7 +39,7 @@ export default class RenameModal extends Modal {
 
   onOpen(): void {
     // init modal
-    this.titleEl.setText("Rename Image");
+    this.titleEl.setText("Rename image");
 
     const el = this.contentEl.createDiv();
     render(() => <this.solidView onNewNameChange={(newName) => {
