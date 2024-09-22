@@ -167,7 +167,6 @@ export default class ImageContextMenuImpl implements ImageContextMenu {
   }
 
   private onContextMenu(event: MouseEvent) {
-    console.warn("onContextMenu", event);
     this.currentlySelectedImages = undefined;
 
     const target = event.target as HTMLElement;
@@ -286,7 +285,6 @@ export default class ImageContextMenuImpl implements ImageContextMenu {
         new Notice("Downloaded");
         
         const mdLink = this.plugin.app.fileManager.generateMarkdownLink(downloadedFile, downloadedFile.path);
-        console.warn("mdLink", mdLink);
 
         await this.plugin.app.vault.process(activeMdFile, (content) => {
           const regex = /!\[([^[]+)\]\((.*)\)/gm; // TODO refactor to constants.ts
@@ -297,8 +295,6 @@ export default class ImageContextMenuImpl implements ImageContextMenu {
             }
             return match;
           });
-
-          console.log("newContent", newContent);
 
           return newContent;
         });
@@ -322,7 +318,6 @@ export default class ImageContextMenuImpl implements ImageContextMenu {
     // when new app window is created, we need to re-register the event
     this.plugin.registerEvent(
       this.plugin.app.workspace.on("window-open", (workspace, window) => {
-        console.warn("window-open", window);
         const newThis = new ImageContextMenuImpl(this.plugin);
         this.plugin.registerDomEvent(window.document, "contextmenu", newThis.onContextMenu.bind(newThis));
         this.plugin.registerDomEvent(window.document, "mousedown", newThis.onMouseDown.bind(newThis));
