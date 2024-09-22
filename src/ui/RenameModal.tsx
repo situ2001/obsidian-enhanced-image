@@ -1,6 +1,5 @@
 import { App, Modal, Notice, Setting, TFile } from "obsidian";
 import { render } from "solid-js/web";
-import path from "path";
 
 /**
  * Modal to rename a file,
@@ -64,7 +63,7 @@ export default class RenameModal extends Modal {
             // try-catch block to handle renaming logic
             try {
               const parentPath = this.file.parent?.path ?? "";
-              const pathWithNewName = path.join(parentPath, this.newName + "." + this.file.extension);
+              const pathWithNewName = `${parentPath}/${this.newName}.${this.file.extension}`;
               console.warn("Renaming file from", this.file.path, "to", pathWithNewName);
               await this.app.fileManager.renameFile(this.file, pathWithNewName);
             } catch (e) {
