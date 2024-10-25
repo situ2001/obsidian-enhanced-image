@@ -43,4 +43,6 @@ export function getCurrentSelectedImageAsFile(app: App, elem: HTMLImageElement):
     return file;
   }
   }
+
+  return null;
 }
