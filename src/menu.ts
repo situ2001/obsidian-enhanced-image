@@ -14,7 +14,8 @@ export interface ImageContextMenu {
 
 export default class ImageContextMenuImpl implements ImageContextMenu {
   private static imgSelectors = [
-    "img",
+    ".internal-embed img",
+    ".image-container img",
   ];
 
   private plugin: Plugin;
