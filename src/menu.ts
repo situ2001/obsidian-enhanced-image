@@ -14,6 +14,8 @@ export interface ImageContextMenu {
 
 export default class ImageContextMenuImpl implements ImageContextMenu {
   private static imgSelectors = [
+    ".markdown-preview-view img",
+    ".markdown-source-view img",
     ".internal-embed img",
     ".image-container img",
   ];
@@ -25,7 +27,55 @@ export default class ImageContextMenuImpl implements ImageContextMenu {
     this.plugin = plugin;
   }
 
+  // TODO refactor
+  private buildMenuForRemoteImageInPreviewMode(menu: Menu): Menu {
+    menu.addItem((item) => {
+      item.setTitle("Copy");
+      item.setIcon("copy");
+      item.onClick(() => {
+        if (!this.currentlySelectedImages) {
+          new Notice("No image selected");
+          return;
+        }
+        copyImageToClipboard(this.currentlySelectedImages);
+      });
+    });
+
+    menu.addItem((item) => {
+      item.setTitle("Copy link");
+      item.setIcon("link");
+      item.onClick(() => {
+        const link = this.currentlySelectedImages?.src;
+        if (link === undefined) {
+          new Notice("No link found");
+          return;
+        }
+        navigator.clipboard.writeText(link);
+        new Notice("Copy link successfully");
+      });
+    });
+
+    menu.addItem((item) => {
+      item.setTitle("Save Image as");
+      item.setIcon("save");
+      item.onClick(() => {
+        if (!this.currentlySelectedImages) {
+          new Notice("No image selected");
+          return;
+        }
+        const url = new URL(this.currentlySelectedImages.src);
+        const filename = url.pathname.split("/").filter((x) => x).pop();
+        console.warn("filename", filename);
+        saveImage(this.currentlySelectedImages.src, filename);
+      });
+    });
+
+    return menu;
+  }
+
   private buildMenuForLocalImage(menu: Menu): Menu {
+    const currentView = this.plugin.app.workspace.getActiveViewOfType(MarkdownView);
+
     menu.addItem((item) => {
       item.setTitle("Copy");
       item.setIcon("copy");
@@ -124,45 +174,53 @@ export default class ImageContextMenuImpl implements ImageContextMenu {
       });
     });
 
-    menu.addItem((item) => {
-      item.setTitle("Rename");
-      item.setIcon("pencil");
-      item.onClick(() => {
-        if (!this.currentlySelectedImages) {
-          new Notice("No image selected");
-          return;
-        }
-        const file = getCurrentSelectedImageAsFile(this.plugin.app, this.currentlySelectedImages);
-        if (!file) {
-          new Notice("No file found");
-          return;
-        }
-        // TODO hardcoded name, should show a modal to user to input new name instead
-        new RenameModal(this.plugin.app, file).open();
+    if (!(currentView && currentView.getMode() === "preview")) {
+      menu.addItem((item) => {
+        item.setTitle("Rename");
+        item.setIcon("pencil");
+        item.onClick(() => {
+          if (!this.currentlySelectedImages) {
+            new Notice("No image selected");
+            return;
+          }
+          const file = getCurrentSelectedImageAsFile(this.plugin.app, this.currentlySelectedImages);
+          if (!file) {
+            new Notice("No file found");
+            return;
+          }
+          // TODO hardcoded name, should show a modal to user to input new name instead
+          new RenameModal(this.plugin.app, file).open();
+        });
       });
-    });
+    }
 
-    menu.addItem((item) => {
-      item.setTitle("Delete");
-      item.setIcon("trash");
-      item.onClick(() => {
-        if (!this.currentlySelectedImages) {
-          new Notice("No image selected");
-          return;
-        }
-        const file = getCurrentSelectedImageAsFile(this.plugin.app, this.currentlySelectedImages);
-        if (!file) {
-          new Notice("No file found");
-          return;
-        }
-        // TODO maybe we can use generateMarkdown Link to get the link we want to replace by ''?
-        new DeleteModal(this.plugin.app, {
-          title: "Delete image",
-          content: "Are you sure you want to delete this image?",
-        }, file, this.currentlySelectedImages).open();
-        // safelyTrashImageFile(this.plugin.app, file);
+
+    // TODO refactor to a function
+    if (!(currentView && currentView.getMode() === "preview")) {
+      // if not in preview mode, we can delete the image
+      menu.addItem((item) => {
+        item.setTitle("Delete");
+        item.setIcon("trash");
+        item.onClick(() => {
+          if (!this.currentlySelectedImages) {
+            new Notice("No image selected");
+            return;
+          }
+          const file = getCurrentSelectedImageAsFile(this.plugin.app, this.currentlySelectedImages);
+          if (!file) {
+            new Notice("No file found");
+            return;
+          }
+          // TODO maybe we can use generateMarkdown Link to get the link we want to replace by ''?
+          new DeleteModal(this.plugin.app, {
+            title: "Delete image",
+            content: "Are you sure you want to delete this image?",
+          }, file, this.currentlySelectedImages).open();
+          // safelyTrashImageFile(this.plugin.app, file);
+        });
       });
-    });
+    }
+
 
     return menu;
   }
@@ -189,7 +247,13 @@ export default class ImageContextMenuImpl implements ImageContextMenu {
     clickDispatchTarget.dispatchEvent(clickEvent);
 
     const menu = new Menu();
-    this.buildMenuForLocalImage(menu);
+
+    // check image location, if https, then remote, otherwise local
+    const markdownView = this.plugin.app.workspace.getActiveViewOfType(MarkdownView);
+    // TODO refactor
+    (this.currentlySelectedImages.src.match(/https?:\/\//) && (markdownView?.getMode() === "preview"))
+      ? this.buildMenuForRemoteImageInPreviewMode(menu)
+      : this.buildMenuForLocalImage(menu);
 
     // TODO this may be a bug, the execution order is different between origin window and new window
     // menu.onHide(() => {
@@ -275,16 +339,16 @@ export default class ImageContextMenuImpl implements ImageContextMenu {
           new Notice("No image selected");
           return;
         }
-        
+
         const activeMdFile = this.plugin.app.workspace.getActiveFile();
         if (!activeMdFile) {
           new Notice("No active file to replace");
           return;
         }
-        
+
         const downloadedFile = await downloadImage(this.plugin.app, currentlySelectedImages.src);
         new Notice("Downloaded");
-        
+
         const mdLink = this.plugin.app.fileManager.generateMarkdownLink(downloadedFile, downloadedFile.path);
 
         await this.plugin.app.vault.process(activeMdFile, (content) => {
