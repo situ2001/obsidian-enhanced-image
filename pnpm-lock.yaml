@@ -27,8 +27,8 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       solid-js:
-        specifier: ^1.8.22
-        version: 1.8.22
+        specifier: ^1.9.4
+        version: 1.9.4
     devDependencies:
       '@types/file-saver':
         specifier: ^2.0.7
@@ -56,7 +56,7 @@ importers:
         version: 0.17.3
       esbuild-plugin-solid:
         specifier: ^0.6.0
-        version: 0.6.0(esbuild@0.17.3)(solid-js@1.8.22)
+        version: 0.6.0(esbuild@0.17.3)(solid-js@1.9.4)
       eslint:
         specifier: ^9.9.0
         version: 9.9.0
@@ -68,7 +68,7 @@ importers:
         version: 15.9.0
       obsidian:
         specifier: latest
-        version: 1.6.6(@codemirror/state@6.4.1)(@codemirror/view@6.32.0)
+        version: 1.8.7(@codemirror/state@6.4.1)(@codemirror/view@6.32.0)
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
@@ -921,8 +921,8 @@ packages:
   node-releases@2.0.18:
     resolution: {integrity: sha512-d9VeXT4SJ7ZeOqGX6R5EM022wpL+eWPooLI+5UpWn2jCT1aosUQEhQP214x33Wkwx3JQMvIm+tIoVOdodFS40g==}
 
-  obsidian@1.6.6:
-    resolution: {integrity: sha512-GZHzeOiwmw/wBjB5JwrsxAZBLqxGQmqtEKSvJJvT0LtTcqeOFnV8jv0ZK5kO7hBb44WxJc+LdS7mZgLXbb+qXQ==}
+  obsidian@1.8.7:
+    resolution: {integrity: sha512-h4bWwNFAGRXlMlMAzdEiIM2ppTGlrh7uGOJS6w4gClrsjc+ei/3YAtU2VdFUlCiPuTHpY4aBpFJJW75S1Tl/JA==}
     peerDependencies:
       '@codemirror/state': ^6.0.0
       '@codemirror/view': ^6.0.0
@@ -1025,14 +1025,14 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  seroval-plugins@1.1.1:
-    resolution: {integrity: sha512-qNSy1+nUj7hsCOon7AO4wdAIo9P0jrzAMp18XhiOzA6/uO5TKtP7ScozVJ8T293oRIvi5wyCHSM4TrJo/c/GJA==}
+  seroval-plugins@1.2.1:
+    resolution: {integrity: sha512-H5vs53+39+x4Udwp4J5rNZfgFuA+Lt+uU+09w1gYBVWomtAl98B+E9w7yC05Xc81/HgLvJdlyqJbU0fJCKCmdw==}
     engines: {node: '>=10'}
     peerDependencies:
       seroval: ^1.0
 
-  seroval@1.1.1:
-    resolution: {integrity: sha512-rqEO6FZk8mv7Hyv4UCj3FD3b6Waqft605TLfsCe/BiaylRpyyMC0b+uA5TJKawX3KzMrdi3wsLbCaLplrQmBvQ==}
+  seroval@1.2.1:
+    resolution: {integrity: sha512-yBxFFs3zmkvKNmR0pFSU//rIsYjuX418TnlDmc2weaq5XFDqDIV/NOMPBoLrbxjLH42p4UzRuXHryXh9dYcKcw==}
     engines: {node: '>=10'}
 
   shebang-command@2.0.0:
@@ -1047,8 +1047,8 @@ packages:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
 
-  solid-js@1.8.22:
-    resolution: {integrity: sha512-VBzN5j+9Y4rqIKEnK301aBk+S7fvFSTs9ljg+YEdFxjNjH0hkjXPiQRcws9tE5fUzMznSS6KToL5hwMfHDgpLA==}
+  solid-js@1.9.4:
+    resolution: {integrity: sha512-ipQl8FJ31bFUoBNScDQTG3BjN6+9Rg+Q+f10bUbnO6EOTTf5NGerJeHc7wyu5I4RMHEl/WwZwUmy/PTRgxxZ8g==}
 
   strip-ansi@6.0.1:
     resolution: {integrity: sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==}
@@ -1722,13 +1722,13 @@ snapshots:
 
   electron-to-chromium@1.5.13: {}
 
-  esbuild-plugin-solid@0.6.0(esbuild@0.17.3)(solid-js@1.8.22):
+  esbuild-plugin-solid@0.6.0(esbuild@0.17.3)(solid-js@1.9.4):
     dependencies:
       '@babel/core': 7.25.2
       '@babel/preset-typescript': 7.24.7(@babel/core@7.25.2)
       babel-preset-solid: 1.8.22(@babel/core@7.25.2)
       esbuild: 0.17.3
-      solid-js: 1.8.22
+      solid-js: 1.9.4
     transitivePeerDependencies:
       - supports-color
 
@@ -2015,7 +2015,7 @@ snapshots:
 
   node-releases@2.0.18: {}
 
-  obsidian@1.6.6(@codemirror/state@6.4.1)(@codemirror/view@6.32.0):
+  obsidian@1.8.7(@codemirror/state@6.4.1)(@codemirror/view@6.32.0):
     dependencies:
       '@codemirror/state': 6.4.1
       '@codemirror/view': 6.32.0
@@ -2095,11 +2095,11 @@ snapshots:
 
   semver@7.6.3: {}
 
-  seroval-plugins@1.1.1(seroval@1.1.1):
+  seroval-plugins@1.2.1(seroval@1.2.1):
     dependencies:
-      seroval: 1.1.1
+      seroval: 1.2.1
 
-  seroval@1.1.1: {}
+  seroval@1.2.1: {}
 
   shebang-command@2.0.0:
     dependencies:
@@ -2109,11 +2109,11 @@ snapshots:
 
   slash@3.0.0: {}
 
-  solid-js@1.8.22:
+  solid-js@1.9.4:
     dependencies:
       csstype: 3.1.3
-      seroval: 1.1.1
-      seroval-plugins: 1.1.1(seroval@1.1.1)
+      seroval: 1.2.1
+      seroval-plugins: 1.2.1(seroval@1.2.1)
 
   strip-ansi@6.0.1:
     dependencies:
